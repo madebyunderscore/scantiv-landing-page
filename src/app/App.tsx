@@ -899,6 +899,14 @@ const testimonials = [
 ];
 
 function TestimonialsSection() {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ align: "start", containScroll: "trimSnaps", dragFree: false });
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    emblaApi.on("select", () => setSelectedIndex(emblaApi.selectedScrollSnap()));
+  }, [emblaApi]);
+
   return (
     <section className="bg-background-elevated py-16 md:py-24">
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -914,8 +922,10 @@ function TestimonialsSection() {
             </p>
           </FadeUp>
 
-          {/* ── 6-col: testimonial cards — 2-col grid ── */}
-          <div className={`${TEXT_COL} grid grid-cols-2 gap-4`}>
+          {/* ── Desktop: 6-col grid; Mobile: carousel ── */}
+          <div className={TEXT_COL}>
+            {/* Desktop grid */}
+            <div className="hidden md:grid grid-cols-2 gap-4">
             {testimonials.map((t, i) => (
               <motion.div
                 key={i}
@@ -955,6 +965,68 @@ function TestimonialsSection() {
                 </blockquote>
               </motion.div>
             ))}
+            </div>
+
+            {/* Mobile carousel */}
+            <div className="md:hidden">
+              <div className="overflow-hidden" ref={emblaRef}>
+                <div className="flex gap-4">
+                  {testimonials.map((t, i) => (
+                    <div
+                      key={i}
+                      className="flex-shrink-0 flex flex-col gap-4 p-5 bg-neutral-white dotted-border-box"
+                      style={{ width: "100%" }}
+                    >
+                      {/* Avatar or name */}
+                      {t.avatar ? (
+                        <img
+                          src={t.avatar}
+                          alt={t.attribution}
+                          className="object-contain object-left"
+                          style={{ height: 32, width: "auto", display: "block" }}
+                        />
+                      ) : t.name ? (
+                        <p
+                          className="text-text-quarternary tracking-widest"
+                          style={{ fontSize: "var(--fs-para-body)", fontWeight: "var(--font-weight-medium)", letterSpacing: "0.08em" }}
+                        >
+                          {t.name}
+                        </p>
+                      ) : null}
+
+                      {/* Quote */}
+                      <blockquote className="flex-1 flex flex-col gap-4" style={{ margin: 0 }}>
+                        <p className="text-text" style={{ fontSize: "var(--fs-para-body)", lineHeight: "var(--lh-para-body)" }}>
+                          {t.quote}
+                        </p>
+                        <footer>
+                          <cite style={{ fontSize: "var(--fs-para-sm)", lineHeight: "var(--lh-para-sm)", color: "var(--color-accent)", fontStyle: "normal" }}>
+                            {t.attribution}
+                          </cite>
+                        </footer>
+                      </blockquote>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Carousel indicators */}
+              <div className="flex gap-2 justify-center mt-4">
+                {testimonials.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => emblaApi?.scrollTo(i)}
+                    className={`rounded-full transition-all ${
+                      i === selectedIndex
+                        ? "bg-text"
+                        : "bg-text-quarternary hover:bg-text-tertiary"
+                    }`}
+                    style={{ width: i === selectedIndex ? 8 : 6, height: 6 }}
+                    aria-label={`Go to testimonial ${i + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
 
         </div>
