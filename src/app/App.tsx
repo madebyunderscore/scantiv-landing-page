@@ -24,7 +24,30 @@ import {
   ArrowRight,
 } from "@phosphor-icons/react";
 import svgPaths from "../imports/svg-1hdib5ybbz";
+import briefSparkLogo from "../assets/brief-spark.png";
 import useEmblaCarousel from "embla-carousel-react";
+
+// ─────────────────────────────────────────────
+// ⚠️ IMAGE IMPORTS — ALWAYS USE THIS PATTERN
+// ─────────────────────────────────────────────
+// For component images (avatars, graphics, logos):
+//   import imageFile from "../assets/filename.png";
+//   Then reference: avatar: imageFile
+//
+// Never use string paths like "src/assets/filename.png"
+// String paths break in production on Cloudflare Pages.
+// Vite must process images as ES modules for cache busting.
+// ─────────────────────────────────────────────
+
+// ─────────────────────────────────────────────
+// META PIXEL HELPERS
+// ─────────────────────────────────────────────
+
+const trackCheckout = (value: number) => {
+  if (typeof (window as any).fbq !== "undefined") {
+    (window as any).fbq("track", "InitiateCheckout", { value, currency: "SGD", num_items: 1 });
+  }
+};
 
 // ─────────────────────────────────────────────
 // LOGO
@@ -159,7 +182,7 @@ function Navbar() {
             </span>
           </a>
           <div className="hidden sm:block">
-            <a href="https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n" className={btnPrimary} style={btnPad}>Get GEO Audit at S$99</a>
+            <a href="https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n" onClick={() => trackCheckout(99)} className={btnPrimary} style={btnPad}>Get GEO Audit at S$99</a>
           </div>
           <button className="sm:hidden text-text p-1" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -171,7 +194,7 @@ function Navbar() {
         </div>
         {mobileOpen && (
           <div className="sm:hidden px-4 pb-4 flex flex-col gap-4">
-            <a href="https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n" className={`${btnPrimary} w-full`} style={btnPad}>Get GEO Audit at S$99</a>
+            <a href="https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n" onClick={() => trackCheckout(99)} className={`${btnPrimary} w-full`} style={btnPad}>Get GEO Audit at S$99</a>
           </div>
         )}
       </div>
@@ -475,7 +498,7 @@ function HeroSection() {
               </p>
             </div>
             <div className="mt-7 flex flex-wrap gap-3">
-              <a href="https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n" className={btnPrimary} style={btnPad}>Get GEO Audit at S$99</a>
+              <a href="https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n" onClick={() => trackCheckout(99)} className={btnPrimary} style={btnPad}>Get GEO Audit at S$99</a>
               <a href="#sample-report" className={btnSecondary} style={btnPad}>View Sample Report</a>
             </div>
           </div>
@@ -868,7 +891,7 @@ const testimonials = [
     attribution: "Beatrice. Artist at Beatrice Seck Official",
   },
   {
-    avatar: "src/assets/brief-spark.png",
+    avatar: briefSparkLogo,
     name: null,
     quote: "I initially paid for the audit and got my report within a day. Our site was quite complicated as it was previously built on Wix. The consultation with Scantiv's GEO specialist helped to remove some blockers and eventually we migrated out of Wix. That led us to improve our AI visibility score by 2.2x.",
     attribution: "Zacchaeus. Founder at BriefSpark AI",
@@ -1165,7 +1188,7 @@ function PricingSection() {
                     </div>
                   ))}
                 </div>
-                <a href="https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n" className={btnPrimary} style={{ ...btnPad, marginTop: "var(--spacing-md)" }}>Get GEO Audit at S$99</a>
+                <a href="https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n" onClick={() => trackCheckout(99)} className={btnPrimary} style={{ ...btnPad, marginTop: "var(--spacing-md)" }}>Get GEO Audit at S$99</a>
               </motion.div>
 
               {/* Plan 2 */}
@@ -1199,7 +1222,7 @@ function PricingSection() {
                     </div>
                   ))}
                 </div>
-                <a href="https://buy.stripe.com/dRm6oIch18w78PjeuL5Vu0o" className={btnSecondary} style={{ ...btnPad, marginTop: "var(--spacing-md)" }}>Get Audit + Strategy Call</a>
+                <a href="https://buy.stripe.com/dRm6oIch18w78PjeuL5Vu0o" onClick={() => trackCheckout(299)} className={btnSecondary} style={{ ...btnPad, marginTop: "var(--spacing-md)" }}>Get Audit + Strategy Call</a>
               </motion.div>
 
             </div>
@@ -1310,7 +1333,7 @@ function FooterSection() {
           <FadeUp className={TEXT_COL}>
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <p className="text-text" style={{ fontSize: "var(--fs-h4)", lineHeight: "var(--lh-h4)", fontWeight: "var(--font-weight-medium)" }}>Find out where AI ranks you.</p>
-              <a href="https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n" className={btnPrimary} style={btnPad}>Get GEO Audit at S$99</a>
+              <a href="https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n" onClick={() => trackCheckout(99)} className={btnPrimary} style={btnPad}>Get GEO Audit at S$99</a>
             </div>
           </FadeUp>
 
@@ -1368,6 +1391,9 @@ const legalH3: React.CSSProperties = {
 function ThankYouPage() {
   useEffect(() => {
     window.scrollTo(0, 0);
+    if (typeof (window as any).fbq !== "undefined") {
+      (window as any).fbq("track", "Purchase", { value: 99.00, currency: "SGD" });
+    }
     const w = "https://tally.so/widgets/embed.js";
     if (typeof (window as any).Tally !== "undefined") {
       (window as any).Tally.loadEmbeds();
@@ -1711,6 +1737,1028 @@ function TermsPage() {
 }
 
 // ─────────────────────────────────────────────
+// FIRST PAGE DIGITAL ALTERNATIVES PAGE
+// ─────────────────────────────────────────────
+
+function FirstPageDigitalAlternativesPage() {
+  const alternatives = [
+    {
+      name: "Scantiv",
+      tagline: "Expert GEO Audit (Recommended for Most Singapore SMEs)",
+      features: [
+        "Expert analysis of your current GEO position",
+        "Singapore-specific recommendations",
+        "24-hour turnaround",
+        "PDF report you can share",
+        "Clear prioritised next steps",
+        "No ongoing fees or commitment",
+      ],
+      price: "SGD 99 one-off",
+      cta: "https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n",
+      isScantiv: true,
+    },
+    {
+      name: "Underscore",
+      tagline: "Boutique GEO/AEO + Webflow Specialist",
+      features: [
+        "GEO and AEO focus",
+        "Webflow specialist",
+        "Project-based pricing",
+        "Fast turnaround",
+        "Hands-on, personalised service",
+      ],
+      price: "SGD 2,000–8,000 per project",
+      cta: "#",
+    },
+    {
+      name: "Hashmeta",
+      tagline: "Full-Service GEO Agency",
+      features: [
+        "Full GEO-focused strategy",
+        "Content creation and optimisation",
+        "Technical implementation",
+        "Monthly reporting",
+        "Dedicated account management",
+      ],
+      price: "SGD 3,400+/month",
+      cta: "#",
+    },
+    {
+      name: "OOM Singapore",
+      tagline: "SEO/GEO Specialist Agency",
+      features: [
+        "SEO and GEO strategy",
+        "Content audit and recommendations",
+        "Flexible engagement models",
+        "Competitive analysis",
+        "Training and consultation",
+      ],
+      price: "SGD 2,000–5,000+ per project",
+      cta: "#",
+    },
+    {
+      name: "DIY with Tools",
+      tagline: "Self-Service Tools (Geoptie or Profound)",
+      features: [
+        "Self-service monitoring tool",
+        "No agency overhead",
+        "You control the pace",
+        "Can run at your own pace",
+        "No long-term commitment",
+      ],
+      price: "USD 50–100/month + freelancer",
+      cta: "#",
+    },
+  ];
+
+  const decisionFramework = [
+    {
+      situation: '"I\'m unsure if GEO matters for my business"',
+      action: "Scantiv (SGD 99). Get clarity before committing to an agency.",
+    },
+    {
+      situation: '"I want a Singapore expert but don\'t want a 12-month lock-in"',
+      action: "Underscore (project-based, GEO specialist) or OOM Singapore (flexible engagements).",
+    },
+    {
+      situation: '"I\'m ready for a full-service agency for 12 months"',
+      action: "First Page Digital (established, full-service) or Hashmeta (GEO-focused alternative).",
+    },
+    {
+      situation: '"I want to learn and do some of it myself"',
+      action: "DIY with Geoptie or Profound plus a freelancer for specific tasks.",
+    },
+  ];
+
+  const comparisonRows = [
+    { feature: "Price", fpd: "SGD 2,000+/mo", scantiv: "SGD 99 one-off", underscore: "SGD 2,000–8,000 project", hashmeta: "SGD 3,400+/mo", oom: "SGD 2,000+ project", diy: "SGD 400–1,500/mo" },
+    { feature: "Pricing Model", fpd: "Retainer", scantiv: "One-time", underscore: "Project-based", hashmeta: "Retainer", oom: "Project/flexible", diy: "Subscription" },
+    { feature: "Minimum Commitment", fpd: "12 months", scantiv: "None", underscore: "Per project", hashmeta: "12 months", oom: "Per project", diy: "Monthly" },
+    { feature: "GEO-Specific", fpd: "Partial", scantiv: "Yes", underscore: "Yes", hashmeta: "Yes", oom: "Partial", diy: "Yes" },
+    { feature: "Singapore Context", fpd: "Yes", scantiv: "Yes", underscore: "Yes", hashmeta: "Yes", oom: "Yes", diy: "No" },
+    { feature: "Expert Interpretation", fpd: "Yes", scantiv: "Yes", underscore: "Yes", hashmeta: "Yes", oom: "Yes", diy: "No (DIY)" },
+    { feature: "Turnaround", fpd: "2–4 weeks", scantiv: "24 hours", underscore: "1–2 weeks", hashmeta: "2–4 weeks", oom: "Flexible", diy: "Instant (if you build it)" },
+  ];
+
+  const faqFpd = [
+    { q: "Is First Page Digital good for GEO?", a: "Yes, but they're a full-service agency. If GEO is your primary need, a specialist like Hashmeta or Underscore might give you more focused expertise. Better path: Start with Scantiv (SGD 99) to validate GEO potential, then hire a GEO specialist." },
+    { q: "What does a GEO agency actually do vs. a GEO audit?", a: "A GEO audit (Scantiv) gives you a snapshot with expert analysis in 24 hours at SGD 99. A GEO agency like First Page Digital actually executes the work for 12 months at SGD 2,000–5,000+/month. Think of it like a house inspection (audit) vs. hiring a contractor to fix it (agency)." },
+    { q: "How much should a Singapore SME spend on GEO?", a: "Startup stage (SGD 0–500k revenue): SGD 99–500/month. Growth stage (SGD 500k–5m): SGD 1,000–3,000/month. Scale stage (SGD 5m+): SGD 3,000–10,000+/month. Rule of thumb: GEO should be 5–15% of your total marketing budget." },
+    { q: "Can I use a Scantiv report to brief an agency later?", a: "Absolutely. This is exactly what we design reports for. Share your Scantiv audit with any agency you choose—they'll use it as the baseline for their strategy, saving them 1–2 weeks of discovery." },
+  ];
+
+  return (
+    <div className="bg-background-elevated min-h-screen">
+      <Navbar />
+      <main>
+        {/* Hero */}
+        <section className="bg-background-elevated py-16 md:py-24">
+          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-12 gap-x-4">
+              <FadeUp className={TEXT_COL}>
+                <div
+                  style={{
+                    fontSize: "var(--fs-eyebrow)",
+                    lineHeight: "var(--lh-eyebrow)",
+                    letterSpacing: "var(--ls-eyebrow)",
+                    color: "var(--color-accent)",
+                    fontWeight: "var(--font-weight-medium)",
+                    textTransform: "uppercase",
+                    marginBottom: "var(--spacing-sm)",
+                  }}
+                >
+                  Comparing Digital Marketing Agencies
+                </div>
+                <h1 className="text-text mb-4" style={{ fontSize: "var(--fs-h2)", lineHeight: "var(--lh-h2)", fontWeight: "var(--font-weight-medium)" }}>
+                  Best First Page Digital Alternatives in 2026 (Singapore)
+                </h1>
+                <p className="text-text-tertiary" style={{ fontSize: "var(--fs-para-lg)", lineHeight: "var(--lh-para-lg)" }}>
+                  First Page Digital is a well-known Singapore agency. They deliver results. But they also come with a retainer lock-in starting at SGD 2,000+/month. This guide compares them against real alternatives and helps you figure out what you actually need.
+                </p>
+                <div className="mt-7 flex flex-wrap gap-3">
+                  <a href="https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n" onClick={() => trackCheckout(99)} className={btnPrimary} style={btnPad}>Get GEO Audit at S$99</a>
+                </div>
+              </FadeUp>
+            </div>
+          </div>
+        </section>
+
+        {/* What is First Page Digital */}
+        <section className="bg-background py-16 md:py-24">
+          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-12 gap-x-4">
+              <FadeUp className={TEXT_COL}>
+                <h2 className="text-text mb-6" style={{ fontSize: "var(--fs-h3)", lineHeight: "var(--lh-h3)", fontWeight: "var(--font-weight-medium)" }}>
+                  What is First Page Digital?
+                </h2>
+                <div className="space-y-4">
+                  <p className="text-text-tertiary" style={{ fontSize: "var(--fs-para-body)", lineHeight: "var(--lh-para-body)" }}>
+                    First Page Digital is a Singapore-based digital marketing agency specialising in SEO, GEO (Generative Engine Optimization), and SEM for e-commerce and B2B businesses.
+                  </p>
+                  <div>
+                    <h3 className="text-text mb-2" style={{ fontSize: "var(--fs-h6)", lineHeight: "var(--lh-h6)", fontWeight: "var(--font-weight-medium)" }}>Core Services</h3>
+                    <ul className="text-text-tertiary space-y-1" style={{ fontSize: "var(--fs-para-body)", lineHeight: "var(--lh-para-body)" }}>
+                      {["SEO strategy and optimization", "GEO strategy and content optimization", "Paid advertising (Google Ads, social)", "Content strategy and creation", "Technical SEO audits", "Monthly reporting"].map((svc, i) => (
+                        <li key={i}>• {svc}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="text-text-tertiary" style={{ fontSize: "var(--fs-para-body)", lineHeight: "var(--lh-para-body)" }}>
+                      <strong style={{ color: "var(--color-text-secondary)" }}>Target audience:</strong> E-commerce stores, SaaS companies, service businesses wanting a full-service agency with Singapore expertise.
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-text-tertiary" style={{ fontSize: "var(--fs-para-body)", lineHeight: "var(--lh-para-body)" }}>
+                      <strong style={{ color: "var(--color-text-secondary)" }}>Pricing:</strong> SGD 2,000+/month retainer (typically SGD 2,500–5,000 for meaningful results, annual commitment required).
+                    </p>
+                  </div>
+                </div>
+              </FadeUp>
+            </div>
+          </div>
+        </section>
+
+        {/* Pros and Cons */}
+        <section className="bg-background-elevated py-16 md:py-24">
+          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-12 gap-x-4 gap-y-8">
+              <FadeUp className={TEXT_COL}>
+                <h2 className="text-text mb-8" style={{ fontSize: "var(--fs-h3)", lineHeight: "var(--lh-h3)", fontWeight: "var(--font-weight-medium)" }}>
+                  Pros and Cons of First Page Digital
+                </h2>
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div>
+                    <h3 className="text-text mb-4" style={{ fontSize: "var(--fs-h6)", lineHeight: "var(--lh-h6)", fontWeight: "var(--font-weight-medium)" }}>Pros</h3>
+                    <ul className="space-y-2">
+                      {[
+                        "Established Singapore agency (10+ years operating)",
+                        "Full-service: SEO, GEO, content, ads in one place",
+                        "Dedicated account management",
+                        "Monthly reporting and transparency",
+                        "Deep understanding of Singapore market dynamics",
+                        "Proven track record with local businesses",
+                      ].map((pro, i) => (
+                        <li key={i} className="flex gap-2 text-text-tertiary" style={{ fontSize: "var(--fs-para-body)", lineHeight: "var(--lh-para-body)" }}>
+                          <Check size={20} color="var(--color-accent)" className="shrink-0" />
+                          <span>{pro}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="text-text mb-4" style={{ fontSize: "var(--fs-h6)", lineHeight: "var(--lh-h6)", fontWeight: "var(--font-weight-medium)" }}>Cons</h3>
+                    <ul className="space-y-2">
+                      {[
+                        "Retainer lock-in: minimum SGD 2,000/month, annual commitment",
+                        "High barrier to entry for small businesses or startups",
+                        "Locked in for 12 months even if results are slow",
+                        "Slow initial turnaround (strategy phase 2–4 weeks)",
+                        "Best suited for clients with SGD 5k+/month budgets",
+                        "One-size-fits-most approach (less customised than boutique)",
+                      ].map((con, i) => (
+                        <li key={i} className="flex gap-2 text-text-tertiary" style={{ fontSize: "var(--fs-para-body)", lineHeight: "var(--lh-para-body)" }}>
+                          <span style={{ color: "var(--color-secondary-red)" }}>✕</span>
+                          <span>{con}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </FadeUp>
+            </div>
+          </div>
+        </section>
+
+        {/* Why Consider Alternatives */}
+        <section className="bg-background py-16 md:py-24">
+          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-12 gap-x-4">
+              <FadeUp className={TEXT_COL}>
+                <h2 className="text-text mb-8" style={{ fontSize: "var(--fs-h3)", lineHeight: "var(--lh-h3)", fontWeight: "var(--font-weight-medium)" }}>
+                  Why Consider Alternatives?
+                </h2>
+                <div className="space-y-6">
+                  {[
+                    { num: "1", title: "Retainer cost is prohibitive for smaller businesses", desc: "SGD 2,000/month is SGD 24,000/year. For startups with limited budgets, this is a significant commitment before seeing any return." },
+                    { num: "2", title: "Retainer lock-in creates risk", desc: "Annual commitments mean you're committed for 12 months regardless of results, cash flow, or changing business priorities." },
+                    { num: "3", title: "You might not need a full-service agency yet", desc: "Early-stage businesses often just need GEO clarity, not a complete marketing overhaul. Hiring a full-service agency when you only need GEO is like buying a full suit when you just need a jacket." },
+                    { num: "4", title: "There are specialists who can deliver faster and cheaper", desc: "For GEO specifically, boutique specialists like Scantiv can get you clarity in 24 hours at SGD 99, vs. First Page Digital's 2–4 week strategy phase at SGD 2,000+/month." },
+                  ].map(({ num, title, desc }) => (
+                    <FadeUp key={num} delay={Number(num) * 0.1}>
+                      <div className="flex gap-4">
+                        <div
+                          className="shrink-0 flex items-center justify-center rounded-full text-text"
+                          style={{
+                            width: 40,
+                            height: 40,
+                            background: "var(--color-neutral-100)",
+                            fontSize: "var(--fs-h6)",
+                            fontWeight: "var(--font-weight-medium)",
+                          }}
+                        >
+                          {num}
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-text mb-1" style={{ fontSize: "var(--fs-h6)", lineHeight: "var(--lh-h6)", fontWeight: "var(--font-weight-medium)" }}>
+                            {title}
+                          </h3>
+                          <p className="text-text-tertiary" style={{ fontSize: "var(--fs-para-body)", lineHeight: "var(--lh-para-body)" }}>
+                            {desc}
+                          </p>
+                        </div>
+                      </div>
+                    </FadeUp>
+                  ))}
+                </div>
+              </FadeUp>
+            </div>
+          </div>
+        </section>
+
+        {/* Alternatives Compared */}
+        <section className="bg-background-elevated py-16 md:py-24">
+          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-12 gap-x-4">
+              <FadeUp className={TEXT_COL}>
+                <h2 className="text-text mb-8" style={{ fontSize: "var(--fs-h3)", lineHeight: "var(--lh-h3)", fontWeight: "var(--font-weight-medium)" }}>
+                  First Page Digital Alternatives Compared
+                </h2>
+                <div className="grid gap-6">
+                  {alternatives.map((alt, i) => (
+                    <FadeUp
+                      key={i}
+                      delay={i * 0.1}
+                      className={`rounded-2xl border p-6 ${alt.isScantiv ? "border-accent" : "border-border"}`}
+                    >
+                      <div className="flex items-start justify-between mb-4 gap-4">
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <h3 className="text-text" style={{ fontSize: "var(--fs-h6)", lineHeight: "var(--lh-h6)", fontWeight: "var(--font-weight-medium)" }}>
+                              {alt.name}
+                            </h3>
+                            {alt.isScantiv && (
+                              <span
+                                style={{
+                                  fontSize: "var(--fs-para-sm)",
+                                  lineHeight: "var(--lh-para-sm)",
+                                  letterSpacing: "var(--ls-eyebrow)",
+                                  color: "var(--color-accent)",
+                                  fontWeight: "var(--font-weight-medium)",
+                                  textTransform: "uppercase",
+                                  padding: "4px 8px",
+                                  background: "rgba(var(--rgb-accent), 0.1)",
+                                  borderRadius: "4px",
+                                }}
+                              >
+                                Recommended
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-text-tertiary" style={{ fontSize: "var(--fs-para-sm)", lineHeight: "var(--lh-para-sm)" }}>
+                            {alt.tagline}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="mb-4 space-y-2">
+                        {alt.features.map((feat, j) => (
+                          <p key={j} className="text-text-tertiary flex gap-2" style={{ fontSize: "var(--fs-para-body)", lineHeight: "var(--lh-para-body)" }}>
+                            <Check size={16} color="var(--color-accent)" className="shrink-0 mt-0.5" />
+                            <span>{feat}</span>
+                          </p>
+                        ))}
+                      </div>
+                      <div className="flex items-end justify-between pt-4 border-t border-border">
+                        <p className="text-text-secondary" style={{ fontSize: "var(--fs-para-body)", lineHeight: "var(--lh-para-body)", fontWeight: "var(--font-weight-medium)" }}>
+                          {alt.price}
+                        </p>
+                        <a href={alt.cta} className={alt.isScantiv ? btnPrimary : btnSecondary} style={btnPad}>
+                          Learn More
+                        </a>
+                      </div>
+                    </FadeUp>
+                  ))}
+                </div>
+              </FadeUp>
+            </div>
+          </div>
+        </section>
+
+        {/* Comparison Table */}
+        <section className="bg-background py-16 md:py-24">
+          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-12 gap-x-4">
+              <FadeUp className={TEXT_COL}>
+                <h2 className="text-text mb-8" style={{ fontSize: "var(--fs-h3)", lineHeight: "var(--lh-h3)", fontWeight: "var(--font-weight-medium)" }}>
+                  Comparison Table
+                </h2>
+                <div className="overflow-x-auto">
+                  <table className="w-full border-collapse text-left">
+                    <thead>
+                      <tr className="border-b border-border">
+                        {["Feature", "First Page Digital", "Scantiv", "Underscore", "Hashmeta", "OOM SG", "DIY Tools"].map((h) => (
+                          <th key={h} style={{ fontSize: "var(--fs-para-sm)", fontWeight: "var(--font-weight-medium)", color: "var(--color-text-secondary)", padding: "12px 16px" }}>
+                            {h}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {comparisonRows.map((row, i) => (
+                        <tr key={i} className="border-b border-border">
+                          <td style={{ padding: "12px 16px", fontSize: "var(--fs-para-body)", color: "var(--color-text-secondary)", fontWeight: "var(--font-weight-medium)" }}>
+                            {row.feature}
+                          </td>
+                          <td style={{ padding: "12px 16px", fontSize: "var(--fs-para-sm)", color: "var(--color-text-tertiary)" }}>{row.fpd}</td>
+                          <td style={{ padding: "12px 16px", fontSize: "var(--fs-para-sm)", color: "var(--color-text-tertiary)" }}>{row.scantiv}</td>
+                          <td style={{ padding: "12px 16px", fontSize: "var(--fs-para-sm)", color: "var(--color-text-tertiary)" }}>{row.underscore}</td>
+                          <td style={{ padding: "12px 16px", fontSize: "var(--fs-para-sm)", color: "var(--color-text-tertiary)" }}>{row.hashmeta}</td>
+                          <td style={{ padding: "12px 16px", fontSize: "var(--fs-para-sm)", color: "var(--color-text-tertiary)" }}>{row.oom}</td>
+                          <td style={{ padding: "12px 16px", fontSize: "var(--fs-para-sm)", color: "var(--color-text-tertiary)" }}>{row.diy}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </FadeUp>
+            </div>
+          </div>
+        </section>
+
+        {/* Decision Framework */}
+        <section className="bg-background-elevated py-16 md:py-24">
+          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-12 gap-x-4">
+              <FadeUp className={TEXT_COL}>
+                <h2 className="text-text mb-8" style={{ fontSize: "var(--fs-h3)", lineHeight: "var(--lh-h3)", fontWeight: "var(--font-weight-medium)" }}>
+                  Decision Framework
+                </h2>
+                <div className="space-y-4">
+                  {decisionFramework.map((item, i) => (
+                    <FadeUp
+                      key={i}
+                      delay={i * 0.1}
+                      className="rounded-lg border border-border p-4"
+                    >
+                      <p className="text-text font-medium mb-2" style={{ fontSize: "var(--fs-h6)", lineHeight: "var(--lh-h6)" }}>
+                        {item.situation}
+                      </p>
+                      <p className="text-text-tertiary" style={{ fontSize: "var(--fs-para-body)", lineHeight: "var(--lh-para-body)" }}>
+                        → {item.action}
+                      </p>
+                    </FadeUp>
+                  ))}
+                </div>
+              </FadeUp>
+            </div>
+          </div>
+        </section>
+
+        {/* When to Hire */}
+        <section className="bg-background py-16 md:py-24">
+          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-12 gap-x-4">
+              <FadeUp className={TEXT_COL}>
+                <h2 className="text-text mb-8" style={{ fontSize: "var(--fs-h3)", lineHeight: "var(--lh-h3)", fontWeight: "var(--font-weight-medium)" }}>
+                  When to Hire an Agency vs. Start with an Audit
+                </h2>
+                <div className="space-y-8">
+                  {[
+                    {
+                      stage: "Validation Phase (Start Here for Most SMEs)",
+                      question: "Does GEO matter for my business?",
+                      steps: [
+                        "Run a Scantiv audit (SGD 99).",
+                        "Read the report and understand your current position.",
+                        "Implement the top 3–5 recommendations yourself (usually free).",
+                        "Wait 4–6 weeks and see if you get any AI-sourced traffic.",
+                      ],
+                      cost: "SGD 99 + your time (5–10 hours of implementation)",
+                      timeline: "6–8 weeks total",
+                      outcome: "You'll know whether GEO is worth investing in.",
+                      whoFor: "Startups, SMEs with limited budgets, anyone unsure if GEO is the right lever to pull.",
+                    },
+                  ].map((stage, i) => (
+                    <FadeUp key={i}>
+                      <div>
+                        <h3 className="text-text mb-3" style={{ fontSize: "var(--fs-h6)", lineHeight: "var(--lh-h6)", fontWeight: "var(--font-weight-medium)" }}>
+                          {stage.stage}
+                        </h3>
+                        <p className="text-text-secondary mb-3" style={{ fontSize: "var(--fs-para-sm)" }}>
+                          <strong>You're asking:</strong> {stage.question}
+                        </p>
+                        <ul className="text-text-tertiary space-y-1 mb-3" style={{ fontSize: "var(--fs-para-body)", lineHeight: "var(--lh-para-body)" }}>
+                          {stage.steps.map((step, j) => (
+                            <li key={j}>{j + 1}. {step}</li>
+                          ))}
+                        </ul>
+                        <div className="grid md:grid-cols-2 gap-3 text-sm">
+                          <p className="text-text-tertiary"><strong style={{ color: "var(--color-text-secondary)" }}>Cost:</strong> {stage.cost}</p>
+                          <p className="text-text-tertiary"><strong style={{ color: "var(--color-text-secondary)" }}>Timeline:</strong> {stage.timeline}</p>
+                          <p className="text-text-tertiary md:col-span-2"><strong style={{ color: "var(--color-text-secondary)" }}>Who this is for:</strong> {stage.whoFor}</p>
+                        </div>
+                      </div>
+                    </FadeUp>
+                  ))}
+                </div>
+              </FadeUp>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section id="faq" className="bg-background-elevated py-16 md:py-24">
+          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-12 gap-x-4">
+              <FadeUp className={TEXT_COL}>
+                <h2 className="text-text mb-2" style={{ fontSize: "var(--fs-h3)", lineHeight: "var(--lh-h3)", fontWeight: "var(--font-weight-medium)" }}>
+                  Questions
+                </h2>
+                {faqFpd.map((item, i) => (
+                  <FAQItem key={i} index={i} q={item.q} a={item.a} defaultOpen={false} />
+                ))}
+              </FadeUp>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Footer */}
+        <section className="bg-background py-16 md:py-24">
+          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-12 gap-x-4">
+              <FadeUp className={TEXT_COL}>
+                <div className="rounded-2xl border border-border p-8 text-center">
+                  <h2 className="text-text mb-3" style={{ fontSize: "var(--fs-h3)", lineHeight: "var(--lh-h3)", fontWeight: "var(--font-weight-medium)" }}>
+                    Ready to Get Clarity?
+                  </h2>
+                  <p className="text-text-tertiary mb-6" style={{ fontSize: "var(--fs-para-body)", lineHeight: "var(--lh-para-body)" }}>
+                    You've compared the options. Most Singapore SMEs should start with an audit, not a retainer.
+                  </p>
+                  <a href="https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n" onClick={() => trackCheckout(99)} className={btnPrimary} style={btnPad}>
+                    Get Your GEO Audit at SGD 99
+                  </a>
+                </div>
+              </FadeUp>
+            </div>
+          </div>
+        </section>
+      </main>
+      <FooterSection />
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────
+// PROFOUND ALTERNATIVES PAGE
+// ─────────────────────────────────────────────
+
+function ProfoundAlternativesPage() {
+  const alternatives = [
+    {
+      name: "Scantiv",
+      tagline: "Expert GEO Audit (Recommended for Most Singapore Businesses)",
+      features: [
+        "Expert analysis (not just raw data)",
+        "Singapore-specific recommendations",
+        "24-hour turnaround",
+        "PDF report you can share internally",
+        "Clear next steps: what to improve and in what order",
+        "No ongoing fees or subscription",
+      ],
+      price: "SGD 99 one-off",
+      cta: "https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n",
+      isScantiv: true,
+    },
+    {
+      name: "Peec AI",
+      tagline: "Enterprise Monitoring",
+      features: [
+        "Real-time monitoring across Answer Engines",
+        "Team collaboration and role-based access",
+        "API for custom integrations",
+        "Scheduled reports",
+        "Competitive benchmarking",
+        "White-label options for agencies",
+      ],
+      price: "USD 100+/month",
+      cta: "#",
+    },
+    {
+      name: "Geoptie",
+      tagline: "DIY Dashboard",
+      features: [
+        "Basic visibility tracking",
+        "Dashboard with historical data",
+        "CSV export for analysis",
+        "Affordable pricing",
+        "API access (limited)",
+      ],
+      price: "USD 49+/month",
+      cta: "#",
+    },
+    {
+      name: "Otterly.AI",
+      tagline: "Lightweight Subscription",
+      features: [
+        "Basic visibility tracking",
+        "Monthly reports (automated)",
+        "Simple interface",
+        "Email alerts for significant changes",
+        "Affordable pricing",
+      ],
+      price: "USD 20–25/month",
+      cta: "#",
+    },
+    {
+      name: "HubSpot AI Grader",
+      tagline: "Free Surface-Level Check",
+      features: [
+        "Free scan",
+        "Basic visibility score",
+        "Instant results",
+        "No sign-up required (some versions)",
+      ],
+      price: "Free",
+      cta: "#",
+    },
+  ];
+
+  const decisionFramework = [
+    {
+      situation: '"I need one clear answer right now"',
+      action: "Scantiv (SGD 99). Expert audit, 24-hour turnaround, Singapore context included.",
+    },
+    {
+      situation: '"I need to track visibility month-to-month"',
+      action: "Profound (if budget allows) or Geoptie (if cost-sensitive). Both provide ongoing monitoring.",
+    },
+    {
+      situation: '"I\'m an agency with 10+ client brands"',
+      action: "Peec AI. Built for portfolio management and team collaboration.",
+    },
+    {
+      situation: '"I have almost no budget and just want a baseline"',
+      action: "HubSpot Grader (free) or Otterly.AI (SGD 90/month). Understand that you're not getting expert guidance.",
+    },
+  ];
+
+  const comparisonRows = [
+    { feature: "Pricing Model", profound: "USD 99+/month", scantiv: "SGD 99 one-off", peecai: "USD 100+/month", geoptie: "USD 49+/month", otterly: "USD 20–25/month", hubspot: "Free" },
+    { feature: "Typical Monthly Cost", profound: "SGD 700+", scantiv: "SGD 99 (one-time)", peecai: "SGD 600–750+", geoptie: "SGD 250–350", otterly: "SGD 90–120", hubspot: "Free" },
+    { feature: "Expert Interpretation", profound: "No (raw data)", scantiv: "Yes", peecai: "No", geoptie: "No", otterly: "No", hubspot: "No" },
+    { feature: "Singapore Context", profound: "No", scantiv: "Yes", peecai: "No", geoptie: "No", otterly: "No", hubspot: "No" },
+    { feature: "Real-Time Monitoring", profound: "Yes", scantiv: "No", peecai: "Yes", geoptie: "Yes", otterly: "Yes", hubspot: "No" },
+    { feature: "Ongoing Commitment", profound: "Subscription", scantiv: "None", peecai: "Subscription", geoptie: "Subscription", otterly: "Subscription", hubspot: "None" },
+    { feature: "Turnaround Time", profound: "Continuous", scantiv: "24 hours", peecai: "Continuous", geoptie: "Continuous", otterly: "Continuous", hubspot: "Instant" },
+  ];
+
+  const faqProfound = [
+    { q: "Is Profound worth it for Singapore SMEs?", a: "No, in most cases. Profound is built for enterprises (USD 100k+/year revenue companies) or large agencies managing 10+ brands. For a Singapore SME, the ROI doesn't stack up. Better path: Start with Scantiv (SGD 99), implement the recommendations, and revisit in 6–8 weeks." },
+    { q: "What's the difference between a GEO audit and GEO monitoring?", a: "A GEO audit (Scantiv) gives you a one-time snapshot of your current state with expert recommendations (SGD 99). GEO monitoring (Profound, Peec AI) tracks visibility trends month-to-month (ongoing subscription). Most Singapore businesses need an audit first, then monitoring later (if at all)." },
+    { q: "Can I use Scantiv and Profound together?", a: "Yes. Some agencies do this: Scantiv for quarterly deep audits with expert recommendations, and Profound for continuous monitoring. This combo is most cost-effective for businesses spending SGD 500+/month on other marketing." },
+    { q: "How often should I run a GEO audit?", a: "Just started GEO work: monthly audits (first 3 months). Steady state: quarterly is usually enough. Active content/SEO program: monthly or quarterly. Most Singapore businesses find quarterly audits (4x/year at SGD 99 each = SGD 396/year) gives them enough clarity without breaking the budget." },
+  ];
+
+  return (
+    <div className="bg-background-elevated min-h-screen">
+      <Navbar />
+      <main>
+        {/* Hero */}
+        <section className="bg-background-elevated py-16 md:py-24">
+          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-12 gap-x-4">
+              <FadeUp className={TEXT_COL}>
+                <div
+                  style={{
+                    fontSize: "var(--fs-eyebrow)",
+                    lineHeight: "var(--lh-eyebrow)",
+                    letterSpacing: "var(--ls-eyebrow)",
+                    color: "var(--color-accent)",
+                    fontWeight: "var(--font-weight-medium)",
+                    textTransform: "uppercase",
+                    marginBottom: "var(--spacing-sm)",
+                  }}
+                >
+                  Comparing GEO Monitoring Tools
+                </div>
+                <h1 className="text-text mb-4" style={{ fontSize: "var(--fs-h2)", lineHeight: "var(--lh-h2)", fontWeight: "var(--font-weight-medium)" }}>
+                  Best Profound Alternatives in 2026 (Singapore)
+                </h1>
+                <p className="text-text-tertiary" style={{ fontSize: "var(--fs-para-lg)", lineHeight: "var(--lh-para-lg)" }}>
+                  You've heard about Profound. It's powerful. It's also expensive, requires ongoing commitment, and doesn't come with the context you need as a Singapore business. This guide compares Profound against five real alternatives and helps you pick the right tool for your stage, budget, and GEO needs.
+                </p>
+                <div className="mt-7 flex flex-wrap gap-3">
+                  <a href="https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n" onClick={() => trackCheckout(99)} className={btnPrimary} style={btnPad}>Get GEO Audit at S$99</a>
+                </div>
+              </FadeUp>
+            </div>
+          </div>
+        </section>
+
+        {/* What is Profound */}
+        <section className="bg-background py-16 md:py-24">
+          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-12 gap-x-4">
+              <FadeUp className={TEXT_COL}>
+                <h2 className="text-text mb-6" style={{ fontSize: "var(--fs-h3)", lineHeight: "var(--lh-h3)", fontWeight: "var(--font-weight-medium)" }}>
+                  What is Profound?
+                </h2>
+                <div className="space-y-4">
+                  <p className="text-text-tertiary" style={{ fontSize: "var(--fs-para-body)", lineHeight: "var(--lh-para-body)" }}>
+                    Profound is an AI-powered brand visibility platform that monitors how your business appears across Answer Engines like ChatGPT, Google's AI Overview, and Perplexity.
+                  </p>
+                  <div>
+                    <h3 className="text-text mb-2" style={{ fontSize: "var(--fs-h6)", lineHeight: "var(--lh-h6)", fontWeight: "var(--font-weight-medium)" }}>Core Features</h3>
+                    <ul className="text-text-tertiary space-y-1" style={{ fontSize: "var(--fs-para-body)", lineHeight: "var(--lh-para-body)" }}>
+                      {["Real-time monitoring across ChatGPT, Claude, Perplexity, Gemini, Bing Copilot", "Brand visibility scoring and tracking", "Competitive intelligence", "Monthly reporting", "Enterprise integrations (Slack, HubSpot, etc.)"].map((feat, i) => (
+                        <li key={i}>• {feat}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="text-text-tertiary" style={{ fontSize: "var(--fs-para-body)", lineHeight: "var(--lh-para-body)" }}>
+                      <strong style={{ color: "var(--color-text-secondary)" }}>Target audience:</strong> Large enterprises, agencies managing multiple brands, businesses tracking competitive positioning.
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-text-tertiary" style={{ fontSize: "var(--fs-para-body)", lineHeight: "var(--lh-para-body)" }}>
+                      <strong style={{ color: "var(--color-text-secondary)" }}>Pricing:</strong> USD 99+/month on subscription basis (annual discounts available).
+                    </p>
+                  </div>
+                </div>
+              </FadeUp>
+            </div>
+          </div>
+        </section>
+
+        {/* Pros and Cons */}
+        <section className="bg-background-elevated py-16 md:py-24">
+          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-12 gap-x-4 gap-y-8">
+              <FadeUp className={TEXT_COL}>
+                <h2 className="text-text mb-8" style={{ fontSize: "var(--fs-h3)", lineHeight: "var(--lh-h3)", fontWeight: "var(--font-weight-medium)" }}>
+                  Pros and Cons of Profound
+                </h2>
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div>
+                    <h3 className="text-text mb-4" style={{ fontSize: "var(--fs-h6)", lineHeight: "var(--lh-h6)", fontWeight: "var(--font-weight-medium)" }}>Pros</h3>
+                    <ul className="space-y-2">
+                      {[
+                        "Comprehensive monitoring across all major Answer Engines in real-time",
+                        "Clean, intuitive dashboard for non-technical teams",
+                        "Monthly reports with trend analysis",
+                        "Good for competitive intelligence",
+                        "Enterprise-grade infrastructure and support",
+                      ].map((pro, i) => (
+                        <li key={i} className="flex gap-2 text-text-tertiary" style={{ fontSize: "var(--fs-para-body)", lineHeight: "var(--lh-para-body)" }}>
+                          <Check size={20} color="var(--color-accent)" className="shrink-0" />
+                          <span>{pro}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="text-text mb-4" style={{ fontSize: "var(--fs-h6)", lineHeight: "var(--lh-h6)", fontWeight: "var(--font-weight-medium)" }}>Cons</h3>
+                    <ul className="space-y-2">
+                      {[
+                        "Expensive for Singapore SMEs (SGD 700+/month or SGD 8,400/year)",
+                        "Subscription lock-in: ongoing cost even if you only need one-time clarity",
+                        "No expert interpretation: raw data without strategic context",
+                        "No Singapore-specific guidance on what the numbers mean",
+                        "Overkill for businesses just starting GEO work",
+                        "Assumes you already know why visibility matters and what to do about it",
+                      ].map((con, i) => (
+                        <li key={i} className="flex gap-2 text-text-tertiary" style={{ fontSize: "var(--fs-para-body)", lineHeight: "var(--lh-para-body)" }}>
+                          <span style={{ color: "var(--color-secondary-red)" }}>✕</span>
+                          <span>{con}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </FadeUp>
+            </div>
+          </div>
+        </section>
+
+        {/* Why Consider Alternatives */}
+        <section className="bg-background py-16 md:py-24">
+          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-12 gap-x-4">
+              <FadeUp className={TEXT_COL}>
+                <h2 className="text-text mb-8" style={{ fontSize: "var(--fs-h3)", lineHeight: "var(--lh-h3)", fontWeight: "var(--font-weight-medium)" }}>
+                  Why Consider Alternatives?
+                </h2>
+                <div className="space-y-6">
+                  {[
+                    { num: "1", title: "Subscription cost is prohibitive for smaller budgets", desc: "For startups, freelancers, and SMEs, SGD 700+/month is a significant ongoing commitment. A single bad month of no leads still costs the full fee." },
+                    { num: "2", title: "One-time clarity is more valuable than ongoing monitoring", desc: "Most Singapore SMEs don't need to track monthly visibility trends. They need one clear answer: 'Are we showing up in AI right now, and why or why not?'" },
+                    { num: "3", title: "No Singapore-specific context", desc: "Profound's global data doesn't account for Singapore's unique market dynamics, audience preferences, or competitive landscape. You see raw visibility scores but not what they mean locally." },
+                    { num: "4", title: "Results need expert interpretation", desc: "Raw visibility scores don't tell you why your brand isn't showing up, or what to do about it. You still need strategic guidance." },
+                  ].map(({ num, title, desc }) => (
+                    <FadeUp key={num} delay={Number(num) * 0.1}>
+                      <div className="flex gap-4">
+                        <div
+                          className="shrink-0 flex items-center justify-center rounded-full text-text"
+                          style={{
+                            width: 40,
+                            height: 40,
+                            background: "var(--color-neutral-100)",
+                            fontSize: "var(--fs-h6)",
+                            fontWeight: "var(--font-weight-medium)",
+                          }}
+                        >
+                          {num}
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-text mb-1" style={{ fontSize: "var(--fs-h6)", lineHeight: "var(--lh-h6)", fontWeight: "var(--font-weight-medium)" }}>
+                            {title}
+                          </h3>
+                          <p className="text-text-tertiary" style={{ fontSize: "var(--fs-para-body)", lineHeight: "var(--lh-para-body)" }}>
+                            {desc}
+                          </p>
+                        </div>
+                      </div>
+                    </FadeUp>
+                  ))}
+                </div>
+              </FadeUp>
+            </div>
+          </div>
+        </section>
+
+        {/* Alternatives Compared */}
+        <section className="bg-background-elevated py-16 md:py-24">
+          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-12 gap-x-4">
+              <FadeUp className={TEXT_COL}>
+                <h2 className="text-text mb-8" style={{ fontSize: "var(--fs-h3)", lineHeight: "var(--lh-h3)", fontWeight: "var(--font-weight-medium)" }}>
+                  Profound Alternatives Compared
+                </h2>
+                <div className="grid gap-6">
+                  {alternatives.map((alt, i) => (
+                    <FadeUp
+                      key={i}
+                      delay={i * 0.1}
+                      className={`rounded-2xl border p-6 ${alt.isScantiv ? "border-accent" : "border-border"}`}
+                    >
+                      <div className="flex items-start justify-between mb-4 gap-4">
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <h3 className="text-text" style={{ fontSize: "var(--fs-h6)", lineHeight: "var(--lh-h6)", fontWeight: "var(--font-weight-medium)" }}>
+                              {alt.name}
+                            </h3>
+                            {alt.isScantiv && (
+                              <span
+                                style={{
+                                  fontSize: "var(--fs-para-sm)",
+                                  lineHeight: "var(--lh-para-sm)",
+                                  letterSpacing: "var(--ls-eyebrow)",
+                                  color: "var(--color-accent)",
+                                  fontWeight: "var(--font-weight-medium)",
+                                  textTransform: "uppercase",
+                                  padding: "4px 8px",
+                                  background: "rgba(var(--rgb-accent), 0.1)",
+                                  borderRadius: "4px",
+                                }}
+                              >
+                                Recommended
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-text-tertiary" style={{ fontSize: "var(--fs-para-sm)", lineHeight: "var(--lh-para-sm)" }}>
+                            {alt.tagline}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="mb-4 space-y-2">
+                        {alt.features.map((feat, j) => (
+                          <p key={j} className="text-text-tertiary flex gap-2" style={{ fontSize: "var(--fs-para-body)", lineHeight: "var(--lh-para-body)" }}>
+                            <Check size={16} color="var(--color-accent)" className="shrink-0 mt-0.5" />
+                            <span>{feat}</span>
+                          </p>
+                        ))}
+                      </div>
+                      <div className="flex items-end justify-between pt-4 border-t border-border">
+                        <p className="text-text-secondary" style={{ fontSize: "var(--fs-para-body)", lineHeight: "var(--lh-para-body)", fontWeight: "var(--font-weight-medium)" }}>
+                          {alt.price}
+                        </p>
+                        <a href={alt.cta} className={alt.isScantiv ? btnPrimary : btnSecondary} style={btnPad}>
+                          Learn More
+                        </a>
+                      </div>
+                    </FadeUp>
+                  ))}
+                </div>
+              </FadeUp>
+            </div>
+          </div>
+        </section>
+
+        {/* Comparison Table */}
+        <section className="bg-background py-16 md:py-24">
+          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-12 gap-x-4">
+              <FadeUp className={TEXT_COL}>
+                <h2 className="text-text mb-8" style={{ fontSize: "var(--fs-h3)", lineHeight: "var(--lh-h3)", fontWeight: "var(--font-weight-medium)" }}>
+                  Comparison Table
+                </h2>
+                <div className="overflow-x-auto">
+                  <table className="w-full border-collapse text-left">
+                    <thead>
+                      <tr className="border-b border-border">
+                        {["Feature", "Profound", "Scantiv", "Peec AI", "Geoptie", "Otterly.AI", "HubSpot Grader"].map((h) => (
+                          <th key={h} style={{ fontSize: "var(--fs-para-sm)", fontWeight: "var(--font-weight-medium)", color: "var(--color-text-secondary)", padding: "12px 16px" }}>
+                            {h}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {comparisonRows.map((row, i) => (
+                        <tr key={i} className="border-b border-border">
+                          <td style={{ padding: "12px 16px", fontSize: "var(--fs-para-body)", color: "var(--color-text-secondary)", fontWeight: "var(--font-weight-medium)" }}>
+                            {row.feature}
+                          </td>
+                          <td style={{ padding: "12px 16px", fontSize: "var(--fs-para-sm)", color: "var(--color-text-tertiary)" }}>{row.profound}</td>
+                          <td style={{ padding: "12px 16px", fontSize: "var(--fs-para-sm)", color: "var(--color-text-tertiary)" }}>{row.scantiv}</td>
+                          <td style={{ padding: "12px 16px", fontSize: "var(--fs-para-sm)", color: "var(--color-text-tertiary)" }}>{row.peecai}</td>
+                          <td style={{ padding: "12px 16px", fontSize: "var(--fs-para-sm)", color: "var(--color-text-tertiary)" }}>{row.geoptie}</td>
+                          <td style={{ padding: "12px 16px", fontSize: "var(--fs-para-sm)", color: "var(--color-text-tertiary)" }}>{row.otterly}</td>
+                          <td style={{ padding: "12px 16px", fontSize: "var(--fs-para-sm)", color: "var(--color-text-tertiary)" }}>{row.hubspot}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </FadeUp>
+            </div>
+          </div>
+        </section>
+
+        {/* Decision Framework */}
+        <section className="bg-background-elevated py-16 md:py-24">
+          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-12 gap-x-4">
+              <FadeUp className={TEXT_COL}>
+                <h2 className="text-text mb-8" style={{ fontSize: "var(--fs-h3)", lineHeight: "var(--lh-h3)", fontWeight: "var(--font-weight-medium)" }}>
+                  Decision Framework
+                </h2>
+                <div className="space-y-4">
+                  {decisionFramework.map((item, i) => (
+                    <FadeUp
+                      key={i}
+                      delay={i * 0.1}
+                      className="rounded-lg border border-border p-4"
+                    >
+                      <p className="text-text font-medium mb-2" style={{ fontSize: "var(--fs-h6)", lineHeight: "var(--lh-h6)" }}>
+                        {item.situation}
+                      </p>
+                      <p className="text-text-tertiary" style={{ fontSize: "var(--fs-para-body)", lineHeight: "var(--lh-para-body)" }}>
+                        → {item.action}
+                      </p>
+                    </FadeUp>
+                  ))}
+                </div>
+              </FadeUp>
+            </div>
+          </div>
+        </section>
+
+        {/* How to Choose for Your Stage */}
+        <section className="bg-background py-16 md:py-24">
+          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-12 gap-x-4">
+              <FadeUp className={TEXT_COL}>
+                <h2 className="text-text mb-8" style={{ fontSize: "var(--fs-h3)", lineHeight: "var(--lh-h3)", fontWeight: "var(--font-weight-medium)" }}>
+                  How to Choose a GEO Tool for Your Stage
+                </h2>
+                <div className="space-y-8">
+                  {[
+                    {
+                      stage: "Early Stage (Just Starting Out)",
+                      what: "You don't know yet if GEO is worth investing in. You need clarity first, tools later.",
+                      steps: [
+                        "Start with Scantiv (SGD 99). Get an expert audit.",
+                        "Read the report and understand your current position.",
+                        "Implement the top 3–5 recommendations (usually free or low-cost).",
+                        "In 6–8 weeks, re-run another Scantiv audit to see if you've improved.",
+                        "Only then consider a subscription tool if ongoing tracking makes sense.",
+                      ],
+                      why: "Spending SGD 99 to validate GEO potential is much smarter than committing to SGD 700/month without knowing if it matters for your business.",
+                      timeline: "2–3 months of testing before considering a paid subscription.",
+                    },
+                  ].map((stage, i) => (
+                    <FadeUp key={i}>
+                      <div>
+                        <h3 className="text-text mb-2" style={{ fontSize: "var(--fs-h6)", lineHeight: "var(--lh-h6)", fontWeight: "var(--font-weight-medium)" }}>
+                          {stage.stage}
+                        </h3>
+                        <p className="text-text-tertiary mb-3" style={{ fontSize: "var(--fs-para-body)", lineHeight: "var(--lh-para-body)" }}>
+                          {stage.what}
+                        </p>
+                        <p className="text-text mb-2" style={{ fontSize: "var(--fs-para-sm)", fontWeight: "var(--font-weight-medium)" }}>What to do:</p>
+                        <ol className="text-text-tertiary space-y-1 mb-3 ml-4" style={{ fontSize: "var(--fs-para-body)", lineHeight: "var(--lh-para-body)" }}>
+                          {stage.steps.map((step, j) => (
+                            <li key={j}>{j + 1}. {step}</li>
+                          ))}
+                        </ol>
+                        <div className="space-y-2 text-sm">
+                          <p className="text-text-tertiary"><strong style={{ color: "var(--color-text-secondary)" }}>Why:</strong> {stage.why}</p>
+                          <p className="text-text-tertiary"><strong style={{ color: "var(--color-text-secondary)" }}>Timeline:</strong> {stage.timeline}</p>
+                        </div>
+                      </div>
+                    </FadeUp>
+                  ))}
+                </div>
+              </FadeUp>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section id="faq" className="bg-background-elevated py-16 md:py-24">
+          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-12 gap-x-4">
+              <FadeUp className={TEXT_COL}>
+                <h2 className="text-text mb-2" style={{ fontSize: "var(--fs-h3)", lineHeight: "var(--lh-h3)", fontWeight: "var(--font-weight-medium)" }}>
+                  Questions
+                </h2>
+                {faqProfound.map((item, i) => (
+                  <FAQItem key={i} index={i} q={item.q} a={item.a} defaultOpen={false} />
+                ))}
+              </FadeUp>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Footer */}
+        <section className="bg-background py-16 md:py-24">
+          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-12 gap-x-4">
+              <FadeUp className={TEXT_COL}>
+                <div className="rounded-2xl border border-border p-8 text-center">
+                  <h2 className="text-text mb-3" style={{ fontSize: "var(--fs-h3)", lineHeight: "var(--lh-h3)", fontWeight: "var(--font-weight-medium)" }}>
+                    Ready to Get Clarity?
+                  </h2>
+                  <p className="text-text-tertiary mb-6" style={{ fontSize: "var(--fs-para-body)", lineHeight: "var(--lh-para-body)" }}>
+                    You've compared the options. If you're still unsure where you stand in AI search, that's exactly what Scantiv is for.
+                  </p>
+                  <a href="https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n" onClick={() => trackCheckout(99)} className={btnPrimary} style={btnPad}>
+                    Get Your GEO Audit at SGD 99
+                  </a>
+                </div>
+              </FadeUp>
+            </div>
+          </div>
+        </section>
+      </main>
+      <FooterSection />
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────
 // APP
 // ─────────────────────────────────────────────
 
@@ -1740,6 +2788,8 @@ export default function App() {
       <Route path="/thank-you" element={<ThankYouPage />} />
       <Route path="/privacy" element={<PrivacyPage />} />
       <Route path="/terms" element={<TermsPage />} />
+      <Route path="/first-page-digital-alternatives" element={<FirstPageDigitalAlternativesPage />} />
+      <Route path="/profound-alternatives" element={<ProfoundAlternativesPage />} />
     </Routes>
   );
 }
