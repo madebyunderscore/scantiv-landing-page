@@ -1,0 +1,387 @@
+@custom-variant dark (&:is(.dark *));
+
+/* ── NEW: accent theme variants ── */
+@custom-variant accent (&:is(.accent *));
+@custom-variant dark-accent (&:is(.dark.accent *));
+
+/* ── Rounded dotted borders (accent color) ── */
+.dotted-border-b {
+  border-bottom: none;
+  background-image: radial-gradient(circle, var(--color-accent) 1px, transparent 1px);
+  background-size: 8px 1px;
+  background-repeat: repeat-x;
+  background-position: bottom;
+  padding-bottom: 1px;
+}
+.dotted-border-t {
+  border-top: none;
+  background-image: radial-gradient(circle, var(--color-accent) 1px, transparent 1px);
+  background-size: 8px 1px;
+  background-repeat: repeat-x;
+  background-position: top;
+  padding-top: 1px;
+}
+.dotted-border-r {
+  border-right: none;
+  background-image: radial-gradient(circle, var(--color-accent) 1px, transparent 1px);
+  background-size: 1px 8px;
+  background-repeat: repeat-y;
+  background-position: right;
+  padding-right: 1px;
+}
+.dotted-border-l {
+  border-left: none;
+  background-image: radial-gradient(circle, var(--color-accent) 1px, transparent 1px);
+  background-size: 1px 8px;
+  background-repeat: repeat-y;
+  background-position: left;
+  padding-left: 1px;
+}
+
+/* All-sides dotted border box */
+.dotted-border-box {
+  background-image:
+    radial-gradient(circle, var(--color-accent) 1px, transparent 1px),
+    radial-gradient(circle, var(--color-accent) 1px, transparent 1px),
+    radial-gradient(circle, var(--color-accent) 1px, transparent 1px),
+    radial-gradient(circle, var(--color-accent) 1px, transparent 1px);
+  background-size: 8px 1px, 8px 1px, 1px 8px, 1px 8px;
+  background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+  background-position: bottom, top, right, left;
+}
+
+/* Mobile: bottom dots → sm+: right dots */
+.dotted-divider {
+  background-image: radial-gradient(circle, var(--color-accent) 1px, transparent 1px);
+  background-size: 8px 1px;
+  background-repeat: repeat-x;
+  background-position: bottom;
+  padding-bottom: 1px;
+}
+@media (min-width: 640px) {
+  .dotted-divider {
+    background-size: 1px 8px;
+    background-repeat: repeat-y;
+    background-position: right;
+    padding-bottom: 0;
+    padding-right: 1px;
+  }
+}
+
+/* ============================================================
+   LAYER 1 — PRIMITIVE PALETTE  (color-Base.tokens.json)
+   Raw named values; never used directly in components.
+   ============================================================ */
+:root {
+  /* Primary */
+  --primitive-primary-green:      #0D7C6B;
+  --primitive-primary-dark-green: #09584C;
+
+  /* Secondary */
+  --primitive-secondary-sand:   #8FAE9E;
+  --primitive-secondary-yellow: #D97706;
+
+  /* Neutral scale */
+  --primitive-neutral-white: #FFFFFF;
+  --primitive-neutral-50:    #FDF9F4;
+  --primitive-neutral-100:   #F9F0E6;
+  --primitive-neutral-200:   #EDE3D8;
+  --primitive-neutral-300:   #E1D1C4;
+  --primitive-neutral-400:   #B49C8B;
+  --primitive-neutral-500:   #856B5A;
+  --primitive-neutral-600:   #644D3F;
+  --primitive-neutral-950:   #0F0906;
+}
+
+
+/* ============================================================
+   LAYER 2 — SEMANTIC TOKENS  (Theme_Light.tokens.json)
+   These are the tokens components should reference.
+   ============================================================ */
+:root {
+  /* Color/Background  → Neutral/White */
+  --color-background:         var(--primitive-neutral-white);
+  /* Color/Background Elevated → Neutral/50 */
+  --color-background-elevated: var(--primitive-neutral-50);
+  /* Color/Text  → Neutral/950 */
+  --color-text:               var(--primitive-neutral-950);
+  /* Color/Text Secondary → Neutral/600 */
+  --color-text-secondary:     var(--primitive-neutral-600);
+  /* Color/Text Tertiary → Neutral/500 */
+  --color-text-tertiary:      var(--primitive-neutral-500);
+  /* Color/Text Quarternary → Neutral/400 */
+  --color-text-quarternary:   var(--primitive-neutral-400);
+  /* Color/Border → Neutral/200 */
+  --color-border:             var(--primitive-neutral-200);
+  /* Color/Accent → Primary/Green */
+  --color-accent:             var(--primitive-primary-green);
+  /* Color/Accent Dark → Primary/Dark Green */
+  --color-accent-dark:        var(--primitive-primary-dark-green);
+
+  /* Expose full neutral scale as named tokens for one-offs */
+  --color-neutral-white: var(--primitive-neutral-white);
+  --color-neutral-50:    var(--primitive-neutral-50);
+  --color-neutral-100:   var(--primitive-neutral-100);
+  --color-neutral-200:   var(--primitive-neutral-200);
+  --color-neutral-300:   var(--primitive-neutral-300);
+  --color-neutral-400:   var(--primitive-neutral-400);
+  --color-neutral-500:   var(--primitive-neutral-500);
+  --color-neutral-600:   var(--primitive-neutral-600);
+  --color-neutral-950:   var(--primitive-neutral-950);
+
+  /* Secondary palette */
+  --color-secondary-sand:   var(--primitive-secondary-sand);
+  --color-secondary-yellow: var(--primitive-secondary-yellow);
+}
+
+
+/* ============================================================
+   LAYER 2 — DARK MODE  (Theme_Dark.tokens.json)
+   ============================================================ */
+.dark {
+  /* Color/Background → Neutral/950 */
+  --color-background:          var(--primitive-neutral-950);
+  /* Color/Background Elevated → Neutral/600 */
+  --color-background-elevated: var(--primitive-neutral-600);
+  /* Color/Text → Neutral/White */
+  --color-text:                var(--primitive-neutral-white);
+  /* Color/Text Secondary → Neutral/100 */
+  --color-text-secondary:      var(--primitive-neutral-100);
+  /* Color/Text Tertiary → Neutral/200 */
+  --color-text-tertiary:       var(--primitive-neutral-200);
+  /* Color/Text Quarternary → Neutral/300 */
+  --color-text-quarternary:    var(--primitive-neutral-300);
+  /* Color/Border → Neutral/200 */
+  --color-border:              var(--primitive-neutral-200);
+  /* Accent stays the same */
+  --color-accent:              var(--primitive-primary-green);
+  --color-accent-dark:         var(--primitive-primary-dark-green);
+}
+
+/* ============================================================
+   LAYER 2 — LIGHT / ACCENT MODE  (_Accent.tokens-1.json)
+   Used for warm-tinted sections on the cream background.
+   Apply class="accent" to a section or wrapper element.
+   ============================================================ */
+.accent {
+  /* Color/Background → Neutral/50 */
+  --color-background:          var(--primitive-neutral-50);
+  /* Color/Background Elevated → Neutral/100 */
+  --color-background-elevated: var(--primitive-neutral-100);
+  /* Color/Text → Neutral/600 (all text levels flatten to 600) */
+  --color-text:                var(--primitive-neutral-600);
+  --color-text-secondary:      var(--primitive-neutral-600);
+  --color-text-tertiary:       var(--primitive-neutral-600);
+  --color-text-quarternary:    var(--primitive-neutral-600);
+  /* Color/Border → Neutral/200 */
+  --color-border:              var(--primitive-neutral-200);
+  /* Accent unchanged */
+  --color-accent:              var(--primitive-primary-green);
+  --color-accent-dark:         var(--primitive-primary-dark-green);
+}
+
+/* ============================================================
+   LAYER 2 — DARK / ACCENT MODE  (_Accent.tokens.json)
+   Warm brown dark variant. Apply class="dark accent" to wrapper.
+   ============================================================ */
+.dark.accent {
+  /* Color/Background → Neutral/300 */
+  --color-background:          var(--primitive-neutral-300);
+  /* Color/Background Elevated → Neutral/500 */
+  --color-background-elevated: var(--primitive-neutral-500);
+  /* Color/Text → Neutral/200 (all text levels flatten to 200) */
+  --color-text:                var(--primitive-neutral-200);
+  --color-text-secondary:      var(--primitive-neutral-200);
+  --color-text-tertiary:       var(--primitive-neutral-200);
+  --color-text-quarternary:    var(--primitive-neutral-200);
+  /* Color/Border → Neutral/200 */
+  --color-border:              var(--primitive-neutral-200);
+  /* Accent unchanged */
+  --color-accent:              var(--primitive-primary-green);
+  --color-accent-dark:         var(--primitive-primary-dark-green);
+}
+
+/* ============================================================
+   LAYER 3 — LAYOUT TOKENS  (layout-Base + _Max + _Min)
+   ============================================================ */
+:root {
+  /* Grid (layout-Base) */
+  --grid-gap-main:   40px;   /* Grid/Gap Main  */
+  --grid-gap-md:     20px;   /* Grid/Gap MD    */
+  --grid-gap-sm:     8px;    /* Grid/Gap SM    */
+  --grid-gap-button: 16px;   /* Grid/Gap Button */
+
+  /* Spacing (layout-Base) */
+  --spacing-xs: 8px;    /* Spacing/Margin XS */
+  --spacing-sm: 16px;   /* Spacing/Margin SM */
+  --spacing-md: 32px;   /* Spacing/Margin MD */
+  --spacing-lg: 48px;   /* Spacing/Margin LG */
+
+  /* Fluid bounds (layout-Base) */
+  --fluid-max: 1440px;  /* Fluid/Max */
+  --fluid-min: 320px;   /* Fluid/Min */
+
+  /* Section / Card / Button — Desktop defaults (_Max) */
+  --section-padding: 96px;   /* Section/Padding Desktop */
+  --card-padding:    24px;   /* Card/Padding Desktop    */
+  --card-radius:     8px;    /* Card/Border Radius      */
+  --button-radius:   8px;    /* Button/Border Radius    */
+  --button-padding-v: 11.2px; /* Button/Vertical Padding */
+  --button-padding-h: 19.2px; /* Button/Horizontal Padding */
+}
+
+/* Mobile overrides (_Min) */
+@media (max-width: 767px) {
+  :root {
+    --section-padding: 48px;  /* Section/Padding Mobile */
+    --card-padding:    16px;  /* Card/Padding Mobile    */
+  }
+}
+
+
+/* ============================================================
+   LAYER 4 — TYPOGRAPHY  (_Max.tokens-1 + _Min.tokens-1)
+   Font: Suisse Int'l (substitute: DM Sans)
+   ============================================================ */
+:root {
+  --font-primary: "Suisse Int'l", sans-serif; /* Fonts/Primary Family */
+  --font-weight-regular: 400;
+  --font-weight-medium:  500;
+
+  /* Desktop type scale (_Max) */
+  --fs-h1:   88px;    --lh-h1:   88px;    --ls-h1:   -1.76px;
+  --fs-h2:   60.8px;  --lh-h2:   66.88px; --ls-h2:   -1.216px;
+  --fs-h3:   36.8px;  --lh-h3:   44.16px; --ls-h3:   0px;
+  --fs-h4:   24px;    --lh-h4:   33.6px;  --ls-h4:   0px;
+  --fs-h5:   19.2px;  --lh-h5:   26.88px; --ls-h5:   0px;
+  --fs-h6:   16px;    --lh-h6:   22.4px;  --ls-h6:   0px;
+
+  --fs-para-xl:   24px;   --lh-para-xl:   33.6px;
+  --fs-para-lg:   20px;   --lh-para-lg:   30px;
+  --fs-para-body: 16px;   --lh-para-body: 25.6px;
+  --fs-para-sm:   14.4px; --lh-para-sm:   21.6px;
+  --fs-eyebrow:   14.4px; --lh-eyebrow:   17.28px; --ls-eyebrow: 1.28px;
+
+  --fs-button:    16px;   --lh-button:    20.8px;
+}
+
+/* Mobile type scale (_Min) */
+@media (max-width: 767px) {
+  :root {
+    --fs-h1:   44.8px;  --lh-h1:   44.8px;
+    --fs-h2:   32px;    --lh-h2:   35.2px;
+    --fs-h3:   24px;    --lh-h3:   28.8px;
+    --fs-h4:   20.8px;  --lh-h4:   29.12px;
+    --fs-h5:   17.6px;  --lh-h5:   24.64px;
+    --fs-h6:   14.4px;  --lh-h6:   20.16px;
+
+    --fs-para-xl:   19.2px; --lh-para-xl:   26.88px;
+    --fs-para-lg:   17.6px; --lh-para-lg:   26.4px;
+    --fs-para-body: 14.4px; --lh-para-body: 23.04px;
+    --fs-para-sm:   12.8px; --lh-para-sm:   19.2px;
+    --fs-eyebrow:   11.2px; --lh-eyebrow:   13.44px;
+  }
+}
+
+
+/* ============================================================
+   LAYER 5 — @theme inline  →  Tailwind v4 utilities
+   bg-background, text-text, border-border, bg-accent, etc.
+   ============================================================ */
+@theme inline {
+  /* Semantic color → Tailwind utility */
+  --color-background:          var(--color-background);
+  --color-background-elevated: var(--color-background-elevated);
+  --color-text:                var(--color-text);
+  --color-text-secondary:      var(--color-text-secondary);
+  --color-text-tertiary:       var(--color-text-tertiary);
+  --color-text-quarternary:    var(--color-text-quarternary);
+  --color-border:              var(--color-border);
+  --color-accent:              var(--color-accent);
+  --color-accent-dark:         var(--color-accent-dark);
+
+  /* Neutral scale utilities */
+  --color-neutral-white: var(--color-neutral-white);
+  --color-neutral-50:    var(--color-neutral-50);
+  --color-neutral-100:   var(--color-neutral-100);
+  --color-neutral-200:   var(--color-neutral-200);
+  --color-neutral-300:   var(--color-neutral-300);
+  --color-neutral-400:   var(--color-neutral-400);
+  --color-neutral-500:   var(--color-neutral-500);
+  --color-neutral-600:   var(--color-neutral-600);
+  --color-neutral-950:   var(--color-neutral-950);
+
+  /* Secondary palette utilities */
+  --color-secondary-sand:   var(--color-secondary-sand);
+  --color-secondary-yellow: var(--color-secondary-yellow);
+
+  /* Font family */
+  --font-sans: var(--font-primary);
+}
+
+
+/* ============================================================
+   LAYER 6 — BASE STYLES
+   Apply semantic type scale to HTML elements.
+   ============================================================ */
+@layer base {
+  * {
+    @apply border-border outline-accent/50;
+  }
+
+  html {
+    font-family: var(--font-primary);
+    font-size: 16px;
+    color: var(--color-text);
+    background-color: var(--color-background);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+  }
+
+  h1 {
+    font-size: var(--fs-h1);
+    line-height: var(--lh-h1);
+    letter-spacing: var(--ls-h1);
+    font-weight: var(--font-weight-medium);
+  }
+  h2 {
+    font-size: var(--fs-h2);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+    font-weight: var(--font-weight-medium);
+  }
+  h3 {
+    font-size: var(--fs-h3);
+    line-height: var(--lh-h3);
+    letter-spacing: var(--ls-h3);
+    font-weight: var(--font-weight-medium);
+  }
+  h4 {
+    font-size: var(--fs-h4);
+    line-height: var(--lh-h4);
+    font-weight: var(--font-weight-medium);
+  }
+  h5 {
+    font-size: var(--fs-h5);
+    line-height: var(--lh-h5);
+    font-weight: var(--font-weight-medium);
+  }
+  h6 {
+    font-size: var(--fs-h6);
+    line-height: var(--lh-h6);
+    font-weight: var(--font-weight-medium);
+  }
+  p {
+    font-size: var(--fs-para-body);
+    line-height: var(--lh-para-body);
+    font-weight: var(--font-weight-regular);
+  }
+  button {
+    font-size: var(--fs-button);
+    line-height: var(--lh-button);
+    font-weight: var(--font-weight-medium);
+  }
+}

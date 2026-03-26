@@ -1,0 +1,308 @@
+{
+  "Section": {
+    "Padding": {
+      "$type": "number",
+      "$value": 96,
+      "$extensions": {
+        "com.figma.variableId": "VariableID:2099:150",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.isOverride": true
+      }
+    }
+  },
+  "Container": {
+    "Max Width": {
+      "$type": "number",
+      "$value": 1440,
+      "$extensions": {
+        "com.figma.variableId": "VariableID:2099:152",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.aliasData": {
+          "targetVariableId": "VariableID:1cae66003fae358d9f44af162247e7edfd74ef0d/-1:-1",
+          "targetVariableName": "Fluid/Max",
+          "targetVariableSetId": "VariableCollectionId:7acdd52ed949e9346c5f5b46e6247fd4ef06485b/-1:-1",
+          "targetVariableSetName": "Layout"
+        },
+        "com.figma.isOverride": true
+      }
+    }
+  },
+  "Card": {
+    "Border Radius": {
+      "$type": "number",
+      "$value": 8,
+      "$extensions": {
+        "com.figma.variableId": "VariableID:12:170",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.isOverride": true
+      }
+    },
+    "Padding": {
+      "$type": "number",
+      "$value": 24,
+      "$extensions": {
+        "com.figma.variableId": "VariableID:2099:151",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.isOverride": true
+      }
+    }
+  },
+  "Button": {
+    "Font": {
+      "$type": "string",
+      "$value": "Suisse Int'l",
+      "$extensions": {
+        "com.figma.variableId": "VariableID:12:159",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.type": "string",
+        "com.figma.aliasData": {
+          "targetVariableId": "VariableID:ad013f961912fb57a111165ec507b15ff56be420/-1:-1",
+          "targetVariableName": "Fonts/Primary Family",
+          "targetVariableSetId": "VariableCollectionId:4647a0cf13bb0adb830efb41f8db8892dd6cc5c6/-1:-1",
+          "targetVariableSetName": "Typography"
+        },
+        "com.figma.isOverride": true
+      }
+    },
+    "Font Weight": {
+      "$type": "number",
+      "$value": 500,
+      "$extensions": {
+        "com.figma.variableId": "VariableID:12:161",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.isOverride": true
+      }
+    },
+    "Font Size": {
+      "$type": "number",
+      "$value": 16,
+      "$extensions": {
+        "com.figma.variableId": "VariableID:12:160",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.isOverride": true
+      }
+    },
+    "Line Height": {
+      "$type": "number",
+      "$value": 20.799999237060547,
+      "$extensions": {
+        "com.figma.variableId": "VariableID:2085:155",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.isOverride": true
+      }
+    },
+    "Letter Spacing": {
+      "$type": "number",
+      "$value": 0,
+      "$extensions": {
+        "com.figma.variableId": "VariableID:2088:183",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.isOverride": true
+      }
+    },
+    "Border Radius": {
+      "$type": "number",
+      "$value": 8,
+      "$extensions": {
+        "com.figma.variableId": "VariableID:12:165",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.isOverride": true
+      }
+    },
+    "Vertical Padding": {
+      "$type": "number",
+      "$value": 11.199999809265137,
+      "$extensions": {
+        "com.figma.variableId": "VariableID:12:176",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.isOverride": true
+      }
+    },
+    "Horizontal Padding": {
+      "$type": "number",
+      "$value": 19.200000762939453,
+      "$extensions": {
+        "com.figma.variableId": "VariableID:12:177",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.isOverride": true
+      }
+    }
+  },
+  "Input": {
+    "Font": {
+      "$type": "string",
+      "$value": "Suisse Int'l",
+      "$extensions": {
+        "com.figma.variableId": "VariableID:12:162",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.type": "string",
+        "com.figma.aliasData": {
+          "targetVariableId": "VariableID:ad013f961912fb57a111165ec507b15ff56be420/-1:-1",
+          "targetVariableName": "Fonts/Primary Family",
+          "targetVariableSetId": "VariableCollectionId:4647a0cf13bb0adb830efb41f8db8892dd6cc5c6/-1:-1",
+          "targetVariableSetName": "Typography"
+        },
+        "com.figma.isOverride": true
+      }
+    },
+    "Font Weight": {
+      "$type": "number",
+      "$value": 400,
+      "$extensions": {
+        "com.figma.variableId": "VariableID:12:164",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.isOverride": true
+      }
+    },
+    "Font Size": {
+      "$type": "number",
+      "$value": 16,
+      "$extensions": {
+        "com.figma.variableId": "VariableID:12:163",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.isOverride": true
+      }
+    },
+    "Line Height": {
+      "$type": "number",
+      "$value": 24,
+      "$extensions": {
+        "com.figma.variableId": "VariableID:2088:184",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.isOverride": true
+      }
+    },
+    "Letter Spacing": {
+      "$type": "number",
+      "$value": 0,
+      "$extensions": {
+        "com.figma.variableId": "VariableID:2088:185",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.isOverride": true
+      }
+    },
+    "Border Radius": {
+      "$type": "number",
+      "$value": 8,
+      "$extensions": {
+        "com.figma.variableId": "VariableID:12:166",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.isOverride": true
+      }
+    },
+    "Bottom Margin": {
+      "$type": "number",
+      "$value": 16,
+      "$extensions": {
+        "com.figma.variableId": "VariableID:2088:186",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.isOverride": true
+      }
+    }
+  },
+  "Input Label": {
+    "Font": {
+      "$type": "string",
+      "$value": "Suisse Int'l",
+      "$extensions": {
+        "com.figma.variableId": "VariableID:12:171",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.type": "string",
+        "com.figma.aliasData": {
+          "targetVariableId": "VariableID:ad013f961912fb57a111165ec507b15ff56be420/-1:-1",
+          "targetVariableName": "Fonts/Primary Family",
+          "targetVariableSetId": "VariableCollectionId:4647a0cf13bb0adb830efb41f8db8892dd6cc5c6/-1:-1",
+          "targetVariableSetName": "Typography"
+        },
+        "com.figma.isOverride": true
+      }
+    },
+    "Font Weight": {
+      "$type": "number",
+      "$value": 500,
+      "$extensions": {
+        "com.figma.variableId": "VariableID:12:173",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.isOverride": true
+      }
+    },
+    "Font Size": {
+      "$type": "number",
+      "$value": 14.399999618530273,
+      "$extensions": {
+        "com.figma.variableId": "VariableID:12:172",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.isOverride": true
+      }
+    },
+    "Line Height": {
+      "$type": "number",
+      "$value": "{Input Label.Font Size}",
+      "$extensions": {
+        "com.figma.variableId": "VariableID:2088:187",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.isOverride": true
+      }
+    },
+    "Letter Spacing": {
+      "$type": "number",
+      "$value": 0,
+      "$extensions": {
+        "com.figma.variableId": "VariableID:2088:188",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.isOverride": true
+      }
+    }
+  },
+  "$extensions": {
+    "com.figma.modeName": "Desktop / Max"
+  }
+}
