@@ -1146,7 +1146,7 @@ function SampleReportSection() {
                     The preview is based on a real audit anonymised for confidentiality. What you receive looks identical to this, personalised to your business.
                   </p>
                 </div>
-                <a href="/geo-report-public.pdf" target="_blank" rel="noopener noreferrer" className={btnSecondary} style={btnPad}>Preview PDF</a>
+                <a href="/geo-report-public.pdf" target="_blank" rel="noopener noreferrer" className={btnSecondary} style={btnPad} onClick={() => { if (typeof window !== 'undefined' && (window as any).fbq) { (window as any).fbq('trackCustom', 'PreviewPDF'); } }}>Preview PDF</a>
               </div>
               <div className="flex-1 min-h-52 sm:min-h-64 overflow-hidden" style={{ background: "var(--color-background-elevated)" }}>
                 <ReportPreviewSVG />
