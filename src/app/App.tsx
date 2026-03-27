@@ -43,10 +43,12 @@ import useEmblaCarousel from "embla-carousel-react";
 // META PIXEL HELPERS
 // ─────────────────────────────────────────────
 
-const trackCheckout = (value: number) => {
+const trackCheckout = (value: number, url: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
+  e.preventDefault();
   if (typeof (window as any).fbq !== "undefined") {
     (window as any).fbq("track", "InitiateCheckout", { value, currency: "SGD", num_items: 1 });
   }
+  setTimeout(() => { window.location.href = url; }, 300);
 };
 
 // ─────────────────────────────────────────────
@@ -182,7 +184,7 @@ function Navbar() {
             </span>
           </a>
           <div className="hidden sm:block">
-            <a href="https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n" onClick={() => trackCheckout(99)} className={btnPrimary} style={btnPad}>Get GEO Audit at S$99</a>
+            <a href="https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n" onClick={trackCheckout(99, "https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n")} className={btnPrimary} style={btnPad}>Get GEO Audit at S$99</a>
           </div>
           <button className="sm:hidden text-text p-1" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -194,7 +196,7 @@ function Navbar() {
         </div>
         {mobileOpen && (
           <div className="sm:hidden px-4 pb-4 flex flex-col gap-4">
-            <a href="https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n" onClick={() => trackCheckout(99)} className={`${btnPrimary} w-full`} style={btnPad}>Get GEO Audit at S$99</a>
+            <a href="https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n" onClick={trackCheckout(99, "https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n")} className={`${btnPrimary} w-full`} style={btnPad}>Get GEO Audit at S$99</a>
           </div>
         )}
       </div>
@@ -498,7 +500,7 @@ function HeroSection() {
               </p>
             </div>
             <div className="mt-7 flex flex-wrap gap-3">
-              <a href="https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n" onClick={() => trackCheckout(99)} className={btnPrimary} style={btnPad}>Get GEO Audit at S$99</a>
+              <a href="https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n" onClick={trackCheckout(99, "https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n")} className={btnPrimary} style={btnPad}>Get GEO Audit at S$99</a>
               <a href="#sample-report" className={btnSecondary} style={btnPad}>View Sample Report</a>
             </div>
           </div>
@@ -1260,7 +1262,7 @@ function PricingSection() {
                     </div>
                   ))}
                 </div>
-                <a href="https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n" onClick={() => trackCheckout(99)} className={btnPrimary} style={{ ...btnPad, marginTop: "var(--spacing-md)" }}>Get GEO Audit at S$99</a>
+                <a href="https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n" onClick={trackCheckout(99, "https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n")} className={btnPrimary} style={{ ...btnPad, marginTop: "var(--spacing-md)" }}>Get GEO Audit at S$99</a>
               </motion.div>
 
               {/* Plan 2 */}
@@ -1294,7 +1296,7 @@ function PricingSection() {
                     </div>
                   ))}
                 </div>
-                <a href="https://buy.stripe.com/dRm6oIch18w78PjeuL5Vu0o" onClick={() => trackCheckout(299)} className={btnSecondary} style={{ ...btnPad, marginTop: "var(--spacing-md)" }}>Get Audit + Strategy Call</a>
+                <a href="https://buy.stripe.com/dRm6oIch18w78PjeuL5Vu0o" onClick={trackCheckout(299, "https://buy.stripe.com/dRm6oIch18w78PjeuL5Vu0o")} className={btnSecondary} style={{ ...btnPad, marginTop: "var(--spacing-md)" }}>Get Audit + Strategy Call</a>
               </motion.div>
 
             </div>
@@ -1405,7 +1407,7 @@ function FooterSection() {
           <FadeUp className={TEXT_COL}>
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <p className="text-text" style={{ fontSize: "var(--fs-h4)", lineHeight: "var(--lh-h4)", fontWeight: "var(--font-weight-medium)" }}>Find out where AI ranks you.</p>
-              <a href="https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n" onClick={() => trackCheckout(99)} className={btnPrimary} style={btnPad}>Get GEO Audit at S$99</a>
+              <a href="https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n" onClick={trackCheckout(99, "https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n")} className={btnPrimary} style={btnPad}>Get GEO Audit at S$99</a>
             </div>
           </FadeUp>
 
@@ -1948,7 +1950,7 @@ function FirstPageDigitalAlternativesPage() {
                   First Page Digital is a well-known Singapore agency. They deliver results. But they also come with a retainer lock-in starting at SGD 2,000+/month. This guide compares them against real alternatives and helps you figure out what you actually need.
                 </p>
                 <div className="mt-7 flex flex-wrap gap-3">
-                  <a href="https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n" onClick={() => trackCheckout(99)} className={btnPrimary} style={btnPad}>Get GEO Audit at S$99</a>
+                  <a href="https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n" onClick={trackCheckout(99, "https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n")} className={btnPrimary} style={btnPad}>Get GEO Audit at S$99</a>
                 </div>
               </FadeUp>
             </div>
@@ -2306,7 +2308,7 @@ function FirstPageDigitalAlternativesPage() {
                   <p className="text-text-tertiary mb-6" style={{ fontSize: "var(--fs-para-body)", lineHeight: "var(--lh-para-body)" }}>
                     You've compared the options. Most Singapore SMEs should start with an audit, not a retainer.
                   </p>
-                  <a href="https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n" onClick={() => trackCheckout(99)} className={btnPrimary} style={btnPad}>
+                  <a href="https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n" onClick={trackCheckout(99, "https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n")} className={btnPrimary} style={btnPad}>
                     Get Your GEO Audit at SGD 99
                   </a>
                 </div>
@@ -2460,7 +2462,7 @@ function ProfoundAlternativesPage() {
                   You've heard about Profound. It's powerful. It's also expensive, requires ongoing commitment, and doesn't come with the context you need as a Singapore business. This guide compares Profound against five real alternatives and helps you pick the right tool for your stage, budget, and GEO needs.
                 </p>
                 <div className="mt-7 flex flex-wrap gap-3">
-                  <a href="https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n" onClick={() => trackCheckout(99)} className={btnPrimary} style={btnPad}>Get GEO Audit at S$99</a>
+                  <a href="https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n" onClick={trackCheckout(99, "https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n")} className={btnPrimary} style={btnPad}>Get GEO Audit at S$99</a>
                 </div>
               </FadeUp>
             </div>
@@ -2816,7 +2818,7 @@ function ProfoundAlternativesPage() {
                   <p className="text-text-tertiary mb-6" style={{ fontSize: "var(--fs-para-body)", lineHeight: "var(--lh-para-body)" }}>
                     You've compared the options. If you're still unsure where you stand in AI search, that's exactly what Scantiv is for.
                   </p>
-                  <a href="https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n" onClick={() => trackCheckout(99)} className={btnPrimary} style={btnPad}>
+                  <a href="https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n" onClick={trackCheckout(99, "https://buy.stripe.com/14A5kE2Gr7s39Tn9ar5Vu0n")} className={btnPrimary} style={btnPad}>
                     Get Your GEO Audit at SGD 99
                   </a>
                 </div>
